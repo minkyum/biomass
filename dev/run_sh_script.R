@@ -1,6 +1,6 @@
 ###############################
 library(rjson)
-params <- fromJSON(file='/usr3/graduate/mkmoon/GitHub/mangrove/input/PLCM_Parameters.json')
+params <- fromJSON(file='/usr3/graduate/mkmoon/GitHub/biomass/input/PLCM_Parameters.json')
 
 geojsonList <- list.files(params$setup$geojsonDir)
 sites <- 1:length(geojsonList)

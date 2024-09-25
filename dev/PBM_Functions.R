@@ -777,7 +777,7 @@ GetSiteShp <- function(fileSR, cLong, cLat){
   
   # Shape file for 10 by 10 km window
   geog_crs = CRS("+proj=longlat +datum=WGS84")
-  utm_crs = raster(fileSR[1])@crs
+  utm_crs = crs(raster(fileSR[1]))
   site <- data.frame(1,cLong,cLat)
   colnames(site) <- c('id','lon','lat')
   xy   <- site[,c(2,3)]
