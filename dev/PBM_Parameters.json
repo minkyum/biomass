@@ -9,9 +9,9 @@
     "geojsonDir":"/projectnb/modislc/users/mkmoon/biomass/plsp/geojson/",
     "dataDir":"/projectnb/modislc/users/mkmoon/biomass/plsp/raw",
     "outDir":"/projectnb/modislc/users/mkmoon/biomass/plsp/Img_cliped/",
-    "rScripts":"/usr3/graduate/mkmoon/GitHub/biomass/input/",
-    "rFunctions":"/usr3/graduate/mkmoon/GitHub/biomass/input/PLCM_Functions.R",
-    "productTable":"/usr3/graduate/mkmoon/GitHub/biomass/input/PLCM_Layers.csv",
+    "rScripts":"/usr3/graduate/mkmoon/GitHub/biomass/dev/",
+    "rFunctions":"/usr3/graduate/mkmoon/GitHub/biomass/dev/PBM_Functions.R",
+    "productTable":"/usr3/graduate/mkmoon/GitHub/biomass/dev/PBM_Layers.csv",
     
     "numChunks":200,
     "numCores":28

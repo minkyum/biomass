@@ -14,14 +14,16 @@ library(doParallel)
 args <- commandArgs()
 print(args)
 
-numSite <- as.numeric(substr(args[3],1,3))
-cc      <- as.numeric(substr(args[3],4,6))
-# numSite <- 1; cc <- 50
+numSite <- as.numeric(substr(args[3],1, 3)) # site number
+cc      <- as.numeric(substr(args[3],4, 6)) # chunk number
+bb      <- as.numeric(substr(args[3],7, 8)) # vi or bands
+yy      <- as.numeric(substr(args[3],9,12)) # year
+# numSite <- 1; cc <- 50; bb <- 1; yy <- 2022
 
 
 
 ###############################
-params <- fromJSON(file='/usr3/graduate/mkmoon/GitHub/mangrove/input/PLCM_Parameters.json')
+params <- fromJSON(file='/usr3/graduate/mkmoon/GitHub/biomass/dev/PBM_Parameters.json')
 source(params$setup$rFunctions)
 
 
@@ -44,21 +46,23 @@ load(file)
 numPix <- dim(band1)[1]
 phenYrs <- params$setup$phenStartYr:params$setup$phenEndYr
 
-f_mat <- matrix(NA,numPix,58*length(phenYrs))
+s_mat <- matrix(NA,numPix,365)
 
 for (i in 1:numPix){
 
-  f_mat[i,] <- GetFeatures(band1[i,],band2[i,],band3[i,],band4[i,],dates,phenYrs,params)
+  s_mat[i,] <- GetSpline(band1[i,],band2[i,],band3[i,],band4[i,],dates,phenYrs,params,bb,yy)
   
   if(i%%10000==0) print(i)
 }
 
 
 # Save
-ckPheDir <- paste0(params$setup$outDir,strSite,'/chunk_feat')
-if (!dir.exists(ckPheDir)) {dir.create(ckPheDir)}
+ckDir <- paste0(params$setup$outDir,strSite,'/chunk_spl')
+if (!dir.exists(ckDir)) {dir.create(ckDir)}
+ckDir <- paste0(ckDir,'/',sprintf('%02d',bb))
+if (!dir.exists(ckDir)) {dir.create(ckDir)}
 
-save(f_mat,file=paste0(ckPheDir,'/chunk_feat_',ckNum,'.rda'))
+save(s_mat,file=paste0(ckDir,'/chunk_spl_',yy,'_',ckNum,'.rda'))
 
 
 

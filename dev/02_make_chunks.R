@@ -19,7 +19,7 @@ cc      <- as.numeric(substr(args[3],4,6))
 
 
 ###############################
-params <- fromJSON(file='/usr3/graduate/mkmoon/GitHub/mangrove/input/PLCM_Parameters.json')
+params <- fromJSON(file='/usr3/graduate/mkmoon/GitHub/biomass/dev/PBM_Parameters.json')
 source(params$setup$rFunctions)
 
 

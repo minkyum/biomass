@@ -5,6 +5,6 @@
 # module load R 
 
 echo Submitting $1
-R --vanilla < /usr3/graduate/mkmoon/GitHub/mangrove/input/01_img_process.R $1
+R --vanilla < /usr3/graduate/mkmoon/GitHub/biomass/dev/01_img_process.R $1
 
 

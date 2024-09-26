@@ -1,6 +1,6 @@
 ###############################
 library(rjson)
-params <- fromJSON(file='/usr3/graduate/mkmoon/GitHub/biomass/input/PLCM_Parameters.json')
+params <- fromJSON(file='/usr3/graduate/mkmoon/GitHub/biomass/dev/PBM_Parameters.json')
 
 geojsonList <- list.files(params$setup$geojsonDir)
 sites <- 1:length(geojsonList)
@@ -24,12 +24,18 @@ for(numSite in 1){
 }
 
 
-## 03_Make features chunks 
+## 03_Make spline ts
 setwd(paste0(params$setup$logDir,'03'))
 for(numSite in 1){
   nn <- sprintf('%03d',numSite)
   for(cc in 1:params$setup$numChunks){
-    system(paste('qsub -V -l h_rt=12:00:00 ',params$setup$rScripts,'run_script_03.sh ',nn,cc,sep=''))
+    cc <- sprintf('%03d',cc)
+    for(bb in 1){
+      bb <- sprintf('%02d',bb)
+      for(yy in params$setup$phenStartYr:params$setup$phenEndYr){
+        system(paste('qsub -V -l h_rt=12:00:00 ',params$setup$rScripts,'run_script_03.sh ',nn,cc,bb,yy,sep=''))    
+      }
+    }
   }
 }
 
